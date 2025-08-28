@@ -2,10 +2,16 @@ import os
 import sys
 from dotenv import load_dotenv
 from google.genai import types
-
+from functions.get_file_info import schema_get_files_info
 load_dotenv()
 
 api_key = os.environ.get("GEMINI_API_KEY")
+
+available_functions = types.Tool(
+    function_declarations=[
+        schema_get_files_info,
+    ]
+)
 
 from google import genai
 
