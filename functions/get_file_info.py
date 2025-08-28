@@ -2,7 +2,7 @@ import os
 import os.path
 from google.genai import types
 
-def get_file_info(working_directory, directory="."):
+def get_files_info(working_directory, directory="."):
     true_path = os.path.join(working_directory, directory)
     true_path = os.path.abspath(true_path)
     if not os.path.abspath(true_path).startswith(os.path.abspath(working_directory)):
@@ -49,6 +49,6 @@ schema_get_files_info = types.FunctionDeclaration(
 )
 
 if __name__ == "__main__":
-    print(get_file_info("testdir"))
-    print(get_file_info(".", "testdir/../../"))
+    print(get_files_info("testdir"))
+    print(get_files_info(".", "testdir/../../"))
 
