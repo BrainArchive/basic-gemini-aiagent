@@ -2,17 +2,12 @@ import os
 import sys
 from dotenv import load_dotenv
 from google.genai import types
-from functions.get_file_info import schema_get_files_info
+
 load_dotenv()
 
 api_key = os.environ.get("GEMINI_API_KEY")
 
-available_functions = types.Tool(
-    function_declarations=[
-        schema_get_files_info,
-    ]
-)
-
+from schemas import available_functions
 from google import genai
 
 client = genai.Client(api_key=api_key)
@@ -26,6 +21,10 @@ When a user asks a question or makes a request, make a function call plan. You c
 
 All paths you provide should be relative to the working directory. You do not need to specify the working directory in your function calls as it is automatically injected for security reasons.
 """
+
+def response(response):
+    pass
+
 def main():
     if len(sys.argv) < 2:
         print("PROVIDE A PROMPT!")
@@ -42,7 +41,6 @@ def main():
         contents= messages,
         config=types.GenerateContentConfig(tools=[available_functions], system_instruction=system_prompt)
     )
-
     if response.function_calls:
         for function_call_part in response.function_calls:
             print(f"Calling function: {function_call_part.name}{function_call_part.args}")
