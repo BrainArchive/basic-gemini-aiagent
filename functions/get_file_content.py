@@ -1,7 +1,7 @@
 import os
 from google.genai import types
 
-def get_files_content(working_directory, filepath):
+def get_file_content(working_directory, filepath):
     true_path = os.path.join(working_directory,filepath)
     true_path = os.path.abspath(true_path)
     if not true_path.startswith(os.path.abspath(working_directory)):
@@ -17,8 +17,8 @@ def get_files_content(working_directory, filepath):
     return file_content_string
 
 
-schema_get_files_content= types.FunctionDeclaration(
-    name="get_files_content",
+schema_get_file_content= types.FunctionDeclaration(
+    name="get_file_content",
     description="reads contents of the file in the specified directory, constrained to the working directory.",
     parameters=types.Schema(
         type=types.Type.OBJECT,
@@ -28,5 +28,6 @@ schema_get_files_content= types.FunctionDeclaration(
                 description="The directory of the file to be read, relative to the working directory. Must be provided.",
             ),
         },
+        required=["filepath"]
     ),
 )

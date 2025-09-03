@@ -49,7 +49,7 @@ schema_run_python_file = types.FunctionDeclaration(
                 items =types.Schema(
                     type = types.Type.STRING
                 ),
-                description="list of string arguments to be used for the given python file. will run the python file with arguments if empty."
+                description="list of string arguments to be used for the given python file. will run the python file without arguments if empty."
             ),
         },
         required=["filepath"]
