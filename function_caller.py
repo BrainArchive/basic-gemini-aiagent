@@ -23,25 +23,9 @@ def call_function(function_call_part, verbose=False):
 
     function_name = function_call_part.name
     if not function_name in FUNCTION_DICTIONARY:
-        return types.Content(
-            role="tool",
-            parts=[
-                types.Part.from_function_response(
-                    name=function_name,
-                    response={"error": f"Unknown function: {function_name}"},
-                )
-            ],
-        )
+        return  f"Unknown function: {function_name}",function_name
     else:
-        function_result = FUNCTION_DICTIONARY[function_name](WORKING_DIRECTORY,**function_call_part.args)
-        return types.Content(
-        role="tool",
-        parts=[
-            types.Part.from_function_response(
-                name=function_name,
-                response={"result": function_result},
-            )
-        ],
-        )
+        function_call_result = FUNCTION_DICTIONARY[function_name](WORKING_DIRECTORY,**function_call_part.args)
+        return function_call_result,function_name
 
 

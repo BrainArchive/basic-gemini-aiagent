@@ -1,7 +1,7 @@
 [project]
 name = "aiagentcourse"
 version = "0.1.0"
-description = "Add your description here"
+description = "A guided project using Gemini API to make a mini AI agent."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
